@@ -12,6 +12,7 @@ function App() {
         <Navbar accounts={accounts} setAccounts={setAccounts} />
         <MainMint accounts={accounts} setAccounts={setAccounts} />
       </div>
+      <div className="moving-background"></div>
     </div>
   );
 }

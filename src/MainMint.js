@@ -10,13 +10,15 @@ const MainMint = ({ accounts, setAccounts }) => {
   const isConnected = Boolean(accounts[0]);
 
   async function handleMint() {
-    if (window.ethers) {
+    if (window.ethereum) {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const signer = provider.getSigner();
       const contract = new ethers.Contract(contractAddress, FARNFT.abi, signer);
       //   encerramos la interaccion con la blockchain
       try {
-        const response = await contract.mint(BigNumber.from(mintaAmount));
+        const response = await contract.mint(BigNumber.from(mintaAmount), {
+          value: ethers.utils.parseEther((0.02 * mintaAmount).toString()), // pasamos el valor de nuestros NFT
+        });
         console.log("response: ", response);
       } catch (err) {
         console.log("error: ", err);
@@ -37,15 +39,21 @@ const MainMint = ({ accounts, setAccounts }) => {
   return (
     <div>
       <h1>Fernando Ariel Rodriguez Example Collection</h1>
-      <p>Proyecto que implementa tech web3</p>
+      <p>
+        Proyecto que implementa Hardhat como framework de desarrollo de smart
+        contract
+      </p>
+      <p>React + ethers</p>
       {isConnected ? (
         <div>
           <div>
             <button onClick={handleDecrement}>-</button>
-            <input type="number" value={mintaAmount} />
+            <input type="number" value={mintaAmount} onChange="1" />
             <button onClick={handleIncrement}>+</button>
           </div>
-          <button onClick={handleMint}>Mintear</button>
+          <button className="button" onClick={handleMint}>
+            Mintear
+          </button>
         </div>
       ) : (
         <p>Tenes que conectarte para poder mintear! 😒</p>
