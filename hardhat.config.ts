@@ -1,4 +1,5 @@
 require("@nomicfoundation/hardhat-toolbox"); // => Importamos el plugin brindado por hardhat toolbox
+require("@nomiclabs/hardhat-etherscan");
 import { HardhatUserConfig } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
 import "@nomiclabs/hardhat-etherscan"; // instalamos el plugin de etehrscan que nos disponibiliza hardhat
